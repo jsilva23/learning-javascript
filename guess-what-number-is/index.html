@@ -69,7 +69,9 @@
     guessField.value = '';
     guessField.focus();
   }
+
   sendHunch.addEventListener('click', checkHunch);
+
   function configEndGame() {
     hunchField.disabled = true;
     sendHunch.disabled = true;
@@ -77,6 +79,26 @@
     restartButton.textContent = 'New game';
     document.body.appendChild(restartButton);
     restartButton.addEventListener('click', restartGame);  
+  }
+
+  function restartGame() {
+    scoreHunches = 1;
+
+    let restartParagraphs = document.querySelectorAll('.result p');
+    for (let i = 0; i < restartParagraphs.length; i++) {
+        restartParagraphs[i].textContent = '';
+    }
+
+    restartButton.parentNode.removeChild(restartButton);
+
+    hunchField.disabled = false;
+    sendHunch.disabled = false;
+    hunchField.value = '';
+    hunchField.focus();
+
+    lastResult.style.backgroundColor = 'white';
+
+    randomNumber = Math.floor(Math.random() * 100) + 1;
   }
 </script>
 </html>
