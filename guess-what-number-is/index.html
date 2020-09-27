@@ -35,10 +35,11 @@
   let lowOrHight = document.querySelector('.lowOrHight');
 
   let sendHunch = document.querySelector('.sendHunch');
-  let guessField = document.querySelector('.hunchField');
+  let hunchField = document.querySelector('.hunchField');
   
   let scoreHunches = 1;
   let restartButton;
+  hunchField.focus();
 
   function checkHunch() {
     let userHunch = Number(hunchField.value);
@@ -66,8 +67,8 @@
         }
     } 
     scoreHunches++;
-    guessField.value = '';
-    guessField.focus();
+    hunchField.value = '';
+    hunchField.focus();
   }
 
   sendHunch.addEventListener('click', checkHunch);
