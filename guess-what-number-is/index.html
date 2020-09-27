@@ -13,7 +13,7 @@
       <p>We select a random number between 1 and 100. See if you can guess at 10 chances or less. We will tell you if your guess was too high or too low.</p>
 
 <div class="form">
-  <label for="guessField">Enter your guess:</label><input type="text" id="campoPalpite" class="campoPalpite">
+  <label for="hunchField">Enter your guess:</label><input type="text" id="hunchField" class="hunchField">
   <input type="submit" value="Send hunch" class="sendHunch">
 </div>
 
@@ -26,8 +26,57 @@
 </body>
 
 <script>
-  
   // write your scripts here
   
+  let randomNumber = Math.floor(Math.random() * 100) +1;
+  
+  let hunches = document.querySelector('.hunches');
+  let lastResult = document.querySelector('.lastResult');
+  let lowOrHight = document.querySelector('.lowOrHight');
+
+  let sendHunch = document.querySelector('.sendHunch');
+  let guessField = document.querySelector('.hunchField');
+  
+  let scoreHunches = 1;
+  let restartButton;
+
+  function checkHunch() {
+    let userHunch = Number(hunchField.value);
+    if (scoreHunches === 1) {
+        hunches.textContent = 'Previous guesses: ';
+    }
+    hunches.textContent += userHunch + ' ';
+
+    if (userHunch === randomNumber) {
+        lastResult.textContent = 'Congratulations! You\'re right';
+        lastResult.style.backgroundColor = 'green';
+        lowOrHight.textContent = '';
+        configEndGame();
+    } else if (scoreHunches === 10) {
+        lastResult.textContent = '!!!GAME OVER!!!';
+        lowOrHight.textContent = '';
+        configEndGame();
+    } else {
+        lastResult.textContent = 'Wrong!';
+        lastResult.style.backgroundColor = 'red';
+        if (userHunch < randomNumber) {
+            lowOrHight.textContent = 'Your hunch is too low!';
+        } else {
+            lowOrHight.textContent = 'Your hunch is too hight!';
+        }
+    } 
+    scoreHunches++;
+    guessField.value = '';
+    guessField.focus();
+  }
+  sendHunch.addEventListener('click', checkHunch);
+  function configEndGame() {
+    hunchField.disabled = true;
+    sendHunch.disabled = true;
+    restartButton = document.createElement('button');
+    restartButton.textContent = 'New game';
+    document.body.appendChild(restartButton);
+    restartButton.addEventListener('click', restartGame);  
+  }
 </script>
 </html>
