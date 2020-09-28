@@ -8,98 +8,26 @@
   </head>
 
   <body>
-      <h1>Guess the number</h1>
+    <h1>Guess the number</h1>
 
-      <p>We select a random number between 1 and 100. See if you can guess at 10 chances or less. We will tell you if your guess was too high or too low.</p>
+    <p>We select a random number between 1 and a another number depending of level. See if you can guess with a limited attempts number for each level. We will tell you if your guess was too high or too low.</p>
+    <div class="information">
+      <p class="level">Leve: 1</p>
+      <p class="attempts">Attempts: 3</p>
+      <p class="between">Random Number between 1 and 5</p>
+    </div>
 
-<div class="form">
-  <label for="hunchField">Enter your guess:</label><input type="text" id="hunchField" class="hunchField">
-  <input type="submit" value="Send hunch" class="sendHunch">
-</div>
+    <div class="form">
+      <label for="hunchField">Enter your guess:</label><input type="text" id="hunchField" class="hunchField">
+      <input type="submit" value="Send hunch" class="sendHunch">
+    </div>
 
-<div class="result">
-  <p class="hunches"></p>
-  <p class="lastResult"></p>
-  <p class="lowOrHight"></p>
-</div>
+    <div class="result">
+      <p class="hunches"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHight"></p>
+    </div>
 
-</body>
-
-<script>
-  // write your scripts here
-  
-  let randomNumber = Math.floor(Math.random() * 100) +1;
-  
-  let hunches = document.querySelector('.hunches');
-  let lastResult = document.querySelector('.lastResult');
-  let lowOrHight = document.querySelector('.lowOrHight');
-
-  let sendHunch = document.querySelector('.sendHunch');
-  let hunchField = document.querySelector('.hunchField');
-  
-  let scoreHunches = 1;
-  let restartButton;
-  hunchField.focus();
-
-  function checkHunch() {
-    let userHunch = Number(hunchField.value);
-    if (scoreHunches === 1) {
-        hunches.textContent = 'Previous guesses: ';
-    }
-    hunches.textContent += userHunch + ' ';
-
-    if (userHunch === randomNumber) {
-        lastResult.textContent = 'Congratulations! You\'re right';
-        lastResult.style.backgroundColor = 'green';
-        lowOrHight.textContent = '';
-        configEndGame();
-    } else if (scoreHunches === 10) {
-        lastResult.textContent = '!!!GAME OVER!!!';
-        lowOrHight.textContent = '';
-        configEndGame();
-    } else {
-        lastResult.textContent = 'Wrong!';
-        lastResult.style.backgroundColor = 'red';
-        if (userHunch < randomNumber) {
-            lowOrHight.textContent = 'Your hunch is too low!';
-        } else {
-            lowOrHight.textContent = 'Your hunch is too hight!';
-        }
-    } 
-    scoreHunches++;
-    hunchField.value = '';
-    hunchField.focus();
-  }
-
-  sendHunch.addEventListener('click', checkHunch);
-
-  function configEndGame() {
-    hunchField.disabled = true;
-    sendHunch.disabled = true;
-    restartButton = document.createElement('button');
-    restartButton.textContent = 'New game';
-    document.body.appendChild(restartButton);
-    restartButton.addEventListener('click', restartGame);  
-  }
-
-  function restartGame() {
-    scoreHunches = 1;
-
-    let restartParagraphs = document.querySelectorAll('.result p');
-    for (let i = 0; i < restartParagraphs.length; i++) {
-        restartParagraphs[i].textContent = '';
-    }
-
-    restartButton.parentNode.removeChild(restartButton);
-
-    hunchField.disabled = false;
-    sendHunch.disabled = false;
-    hunchField.value = '';
-    hunchField.focus();
-
-    lastResult.style.backgroundColor = 'white';
-
-    randomNumber = Math.floor(Math.random() * 100) + 1;
-  }
-</script>
+    <script src="scripts/main.js"></script>
+  </body>
 </html>
