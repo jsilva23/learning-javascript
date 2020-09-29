@@ -121,7 +121,8 @@ function configEndGame() {
 }
 
 function restartGame() {
-    scoreHunches = 1; 
+    scoreHunches = 1;
+    level = 1; 
     
     leverPara.innerHTML = 'Leve: 1';
     attemptsPara.innerHTML = 'Attemps: 3';
@@ -133,6 +134,7 @@ function restartGame() {
     }
 
     restartButton.parentNode.removeChild(restartButton);
+    nextLevelButton.parentNode.removeChild(nextLevelButton);
 
     hunchField.disabled = false;
     sendHunch.disabled = false;
